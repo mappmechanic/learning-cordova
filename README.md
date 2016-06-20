@@ -27,4 +27,4 @@ Check the Cordova Help command to see any other commands you would need for Cord
 `cordova help`
 
 Output would seem like this:
-![Alt text](readme-imds/cordova-help.png?raw=true "Cordova Help Output")
+![Alt text](readme-imgs/cordova-help.png?raw=true "Cordova Help Output")
