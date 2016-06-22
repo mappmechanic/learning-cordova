@@ -102,7 +102,8 @@ Hooks use asynchronous promises and can use the Cordova 'Q' library to return a 
 #### *Step 4:*
 The build process will be on hold till we resolve this promise. We will write a setTimeout script to simulate any asynchronous method and resolve the promise inside it.
 
-`module.exports = function(context) {
+```javascript
+module.exports = function(context) {
     console.log('Hook Running before the Build');
 	var Q = context.requireCordovaModule('q');
     var deferral = new Q.defer();
@@ -116,7 +117,8 @@ The build process will be on hold till we resolve this promise. We will write a 
 	}, 3000);
 
     return deferral.promise;
-}`
+}
+```
 
 #### *Step 5:*
 
