@@ -7,8 +7,8 @@ LinkedIn: http://linkedin.com/in/rahatkh
 I am writing a Repository to help beginners in Learning Cordova. This Repository will contain Step by Step Guides with Sample Codes.
 
 ## Table of Contents
-1. Building HelloWorld App
-2. Cordova Hooks
+1. [Building HelloWorld App](https://github.com/mappmechanic/learning-cordova#building-helloworld-app--)
+2. [Cordova Hooks](https://github.com/mappmechanic/learning-cordova#building-helloworld-app--)
 
 ## Code Samples with Steps :
 
