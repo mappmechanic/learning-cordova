@@ -8,7 +8,7 @@ I am writing a Repository to help beginners in Learning Cordova. This Repository
 
 ## Table of Contents
 1. [Building HelloWorld App](https://github.com/mappmechanic/learning-cordova#building-helloworld-app--)
-2. [Cordova Hooks](https://github.com/mappmechanic/learning-cordova#building-helloworld-app--)
+2. [Cordova Hooks](https://github.com/mappmechanic/learning-cordova#cordova-hooks--)
 
 ## Code Samples with Steps :
 
