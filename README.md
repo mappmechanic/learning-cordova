@@ -41,3 +41,18 @@ After adding iOS & Android as platforms we can check the platforms added by runn
 `cordova platform list`
 
 ![Alt text](readme-imgs/cordova-list.png?raw=true "Cordova List Output")
+
+#### *Step 4:*
+Now we can test if the cordova app is able to prepare itself, resolve all dependencies etc.
+
+`cordova prepare`
+
+#### *Step 5:*
+After preparing the cordova project, we can emulate the app for all platforms or a specific platform:
+
+`cordova emulate ios`
+
+#### *Step 6:*
+During development, for a hybrid app we do not want it to be redeployed on the device everytime. In this scenario we can use cordova serve to host the app on a local dev web server and browse it on the browser during development:
+
+`cordova serve`
