@@ -178,12 +178,12 @@ It is fired when the native platform is ready and any cordova js call to native 
 }
 ```
 
-### Step2: *pause* Event
+#### Step2: *pause* Event
 We can listen to the event which is fired whenever the app is paused as it is taken out of focus by the user.
 
 `document.addEventListener("pause", this.onPause, false)`
 
-### Step2: *resume* Event
+#### Step3: *resume* Event
 We can listen to the event which is fired whenever the app is resumed as it is taken into focus by the user.
 
 `document.addEventListener("resume", this.onResume false)`
