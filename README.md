@@ -84,22 +84,26 @@ We will be using the /hooks folder to maintain our scripts for the hooks. Create
 #### *Step 2:*
 Hooks can be created using Javascript and Non-Javascript (shell scripts/bat scripts). We will be looking at JS hooks for now. Others can be used similarly. Now, we have to create a new JS file named after the hook inside hooks folder. Make a file */hello/hooks/beforeBuild.js*. The cordova hook should have the following code structure:
 
-`module.exports = function(context) {
+```javascript
+module.exports = function(context) {
 	...
-}`
+}
+```
 
 The context variable is passed in the function which has all information regarding the hook.
 
 #### *Step 3:*
 Hooks use asynchronous promises and can use the Cordova 'Q' library to return a promise.
 
-`module.exports = function() {
+```javascript
+module.exports = function() {
 	console.log('Hook Running before the Build');
 	var Q = context.requireCordovaModule('q');
     var deferral = new Q.defer();
 
     return deferral.promise;
-}`
+}
+```
 
 #### *Step 4:*
 The build process will be on hold till we resolve this promise. We will write a setTimeout script to simulate any asynchronous method and resolve the promise inside it.
@@ -137,21 +141,21 @@ Now run the command *'cordova build'* and see the Console output to check the lo
 #### *Step 7:*
 For platform specific hook, just copy the *beforeBuild.js* file and rename it to *afterBuildAndroid.js*. Then you have add a new hook tag in the config.xml but it should be inside the platform tag with the attribute name set to a specific platform name.
 
-`<platform  name="android">
-	<hook type="after_build" src="hooks/afterBuildAndroid.js" />
+`<platform  name="android">   
+	<hook type="after_build" src="hooks/afterBuildAndroid.js" />    
 </platform>`
 
 ### Customize App Properties
 In order to customize your cordova project, we can modify the config.xml file and its properties. Update the config.xml with the following code in the beginning:
 
-`<widget id="com.mappmechanic.learncordova" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>LearnCordova</name>
-    <description>
-        An app to learn all about Cordova.
-    </description>
-    <author email="rahat.khanna@yahoo.co.in" href="http://twitter.com/mappmechanic">
-        MAppmechanic
-    </author>
+`<widget id="com.mappmechanic.learncordova" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">    
+    <name>LearnCordova</name>    
+    <description>    
+        An app to learn all about Cordova.   
+    </description>   
+    <author email="rahat.khanna@yahoo.co.in" href="http://twitter.com/mappmechanic">   
+        MAppmechanic   
+    </author>   
 ...
 ...`
 
