@@ -127,3 +127,10 @@ In config.xml, we have to add a hook element with appropriate script name to mak
 Now run the command *'cordova build'* and see the Console output to check the logs you have put inside the hooks to test if they are running properly.
 
 ![Alt text](readme-imgs/cordova-hook.png?raw=true "Cordova Hook beforeBuild Output")
+
+### *Step 7:*
+For platform specific hook, just copy the *beforeBuild.js* file and rename it to *afterBuildAndroid.js*. Then you have add a new hook tag in the config.xml but it should be inside the platform tag with the attribute name set to a specific platform name.
+
+`<platform  name="android">
+	<hook type="after_build" src="hooks/afterBuildAndroid.js" />
+</platform>`
