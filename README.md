@@ -35,9 +35,9 @@ Output would seem like this:
 First go to the folder by doing 'cd hello' and then, Add a Platform to the cordova project so that we can build for it.
 
 ```
- cd hello
- cordova platform add ios --save
- cordova platform add android@^5.0.0 --save
+ cd hello   
+ cordova platform add ios --save   
+ cordova platform add android@^5.0.0 --save   
 ```
 
 After adding iOS & Android as platforms we can check the platforms added by running the following command:
