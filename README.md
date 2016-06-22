@@ -56,3 +56,8 @@ After preparing the cordova project, we can emulate the app for all platforms or
 During development, for a hybrid app we do not want it to be redeployed on the device everytime. In this scenario we can use cordova serve to host the app on a local dev web server and browse it on the browser during development:
 
 `cordova serve`
+
+#### *Step 7:*
+In order to compile our app and generate builds, we can run the compile command for a specific platform or without any platform to compile for all.
+
+`cordova compile`
