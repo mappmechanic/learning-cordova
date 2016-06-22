@@ -61,3 +61,8 @@ During development, for a hybrid app we do not want it to be redeployed on the d
 In order to compile our app and generate builds, we can run the compile command for a specific platform or without any platform to compile for all.
 
 `cordova compile`
+
+#### *Step 8:*
+In order to run this simple app, we can use the cordova run command which will prepare and then build the app. It will try to find a device connected to the machine for running or else will deploy to any available emulator. Now we will be able to see the app on our phones.
+
+`cordova run`
