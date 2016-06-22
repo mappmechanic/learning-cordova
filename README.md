@@ -9,8 +9,8 @@ I am writing a Repository to help beginners in Learning Cordova. This Repository
 ## Table of Contents
 1. [Building HelloWorld App](https://github.com/mappmechanic/learning-cordova#building-helloworld-app-)
 2. [Cordova Hooks](https://github.com/mappmechanic/learning-cordova#cordova-hooks-)
-3. Customize App Properties
-4. Cordova LifeCycle Events
+3. [Customize App Properties](https://github.com/mappmechanic/learning-cordova#cordova-app-properties)
+4. [Cordova LifeCycle Events](https://github.com/mappmechanic/learning-cordova#cordova-lifecycle-events)
 
 ## Code Samples with Steps :
 
@@ -148,7 +148,8 @@ For platform specific hook, just copy the *beforeBuild.js* file and rename it to
 ### Customize App Properties
 In order to customize your cordova project, we can modify the config.xml file and its properties. Update the config.xml with the following code in the beginning:
 
-`<widget id="com.mappmechanic.learncordova" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">    
+```
+<widget id="com.mappmechanic.learncordova" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">    
     <name>LearnCordova</name>    
     <description>    
         An app to learn all about Cordova.   
@@ -157,7 +158,7 @@ In order to customize your cordova project, we can modify the config.xml file an
         MAppmechanic   
     </author>   
 ...
-...`
+```
 
 ### Cordova LifeCycle Events
 In a Cordova Project, we have to know when the cordova is ready with its native platform so that the web projects can be initialized and start calling the native methods. We also require other lifecycle events to know when an app is going to pause state and then back to resume state.
