@@ -8,7 +8,7 @@ I am writing a Repository to help beginners in Learning Cordova. This Repository
 
 ## Table of Contents
 1. Building HelloWorld App
-
+2. Cordova Hooks
 
 ## Code Samples with Steps :
 
@@ -66,3 +66,64 @@ In order to compile our app and generate builds, we can run the compile command 
 In order to run this simple app, we can use the cordova run command which will prepare and then build the app. It will try to find a device connected to the machine for running or else will deploy to any available emulator. Now we will be able to see the app on our phones.
 
 `cordova run`
+
+
+### Cordova Hooks -
+
+Cordova Hooks represent special scripts which could be added by application and plugin developers or even by your own build system to customize cordova commands. Cordova hooks allow you to perform special activities around cordova commands. For example, you may have a custom tool that checks for code formatting in your javascript file.
+
+#### *Step 1:*
+We will be using the /hooks folder to maintain our scripts for the hooks. Create the folder, if it does not exists
+
+`mkdir /hello/hooks/`
+
+#### *Step 2:*
+Hooks can be created using Javascript and Non-Javascript (shell scripts/bat scripts). We will be looking at JS hooks for now. Others can be used similarly. Now, we have to create a new JS file named after the hook inside hooks folder. Make a file */hello/hooks/beforeBuild.js*. The cordova hook should have the following code structure:
+
+`module.exports = function(context) {
+	...
+}`
+
+The context variable is passed in the function which has all information regarding the hook.
+
+#### *Step 3:*
+Hooks use asynchronous promises and can use the Cordova 'Q' library to return a promise.
+
+`module.exports = function() {
+	console.log('Hook Running before the Build');
+	var Q = context.requireCordovaModule('q');
+    var deferral = new Q.defer();
+
+    return deferral.promise;
+}`
+
+### *Step 4:*
+The build process will be on hold till we resolve this promise. We will write a setTimeout script to simulate any asynchronous method and resolve the promise inside it.
+
+`module.exports = function(context) {
+    console.log('Hook Running before the Build');
+	var Q = context.requireCordovaModule('q');
+    var deferral = new Q.defer();
+
+    setTimeout(function(){
+      console.log('BeforeBuild Hook >> end');
+
+	  // Asynchronous Operations can be done here like writing to any file or making an API call to get Production configuration and replace locally
+
+      deferral.resolve();
+	}, 3000);
+
+    return deferral.promise;
+}`
+
+### *Step 5:*
+
+In config.xml, we have to add a hook element with appropriate script name to make it run.
+
+`<hook type="before_build" src="hooks/beforeBuild.js" />`
+
+### *Step 6:*
+
+Now run the command *'cordova build'* and see the Console output to check the logs you have put inside the hooks to test if they are running properly.
+
+![Alt text](readme-imgs/cordova-hook.png?raw=true "Cordova Hook beforeBuild Output")

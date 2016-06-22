@@ -18,4 +18,5 @@
     <allow-intent href="geo:*" />
     <engine name="ios" spec="~4.1.1" />
     <engine name="android" spec="~4.1.1" />
+	<hook type="before_build" src="hooks/beforeBuild.js" />
 </widget>

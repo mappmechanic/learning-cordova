@@ -20,4 +20,5 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <hook src="hooks/beforeBuild.js" type="before_build" />
 </widget>
