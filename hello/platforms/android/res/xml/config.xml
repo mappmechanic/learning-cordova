@@ -1,16 +1,23 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.example.hello" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.mappmechanic.learncordova" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <preference name="loglevel" value="DEBUG" />
     <feature name="Whitelist">
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
-    <name>HelloWorld</name>
+    <hook src="hooks/afterBuildAndroid.js" type="after_build" />
+    <icon density="ldpi" src="res/icons/android/ldpi.png" />
+    <icon density="mdpi" src="res/icons/android/mdpi.png" />
+    <icon density="hdpi" src="res/icons/android/hdpi.png" />
+    <icon density="xhdpi" src="res/icons/android/xhdpi.png" />
+    <icon density="xxhdpi" src="res/icons/android/xxhdpi.png" />
+    <icon density="xxxhdpi" src="res/icons/android/xxxhdpi.png" />
+    <name>LearnCordova</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        An app to learn all about Cordova.
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="rahat.khanna@yahoo.co.in" href="http://twitter.com/mappmechanic">
+        MAppmechanic
     </author>
     <content src="index.html" />
     <access origin="*" />
@@ -21,4 +28,5 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <hook src="hooks/beforeBuild.js" type="before_build" />
+    <icon density="mdpi" height="57" platform="ios" src="res/icons/ios/icon.png" width="57" />
 </widget>
