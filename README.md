@@ -403,3 +403,14 @@ function network(){
 	}
 }
 ```
+
+### Cordova Camera Plugin
+We will be making a sample for working with Cordova Camera Plugin.
+
+#### Step 1:
+Add the plugin by running the following command:
+
+`cordova plugin add cordova-plugin-camera`
+
+#### Step 2:
+Add a new file *camera.html* inside *plugins* folder.

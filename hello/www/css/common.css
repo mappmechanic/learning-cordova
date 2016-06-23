@@ -22,3 +22,7 @@
 #light.online{
 	background-color:green;
 }
+
+.hidden{
+	display: none;
+}
