@@ -12,6 +12,8 @@ I am writing a Repository to help beginners in Learning Cordova. This Repository
 3. [Customize App Properties](https://github.com/mappmechanic/learning-cordova#cordova-app-properties)
 4. [Cordova LifeCycle Events](https://github.com/mappmechanic/learning-cordova#cordova-lifecycle-events)
 5. [Icons & SplashScreens](https://github.com/mappmechanic/learning-cordova#icons-and-splashscreens)
+6. [Adding Basic App Framework for Plugin Testing]
+7. Cordova Network Plugin
 
 ## Code Samples with Steps :
 
@@ -235,4 +237,169 @@ Please add the following configuration in the platform tag for android.
 		<splash src="res/screens/android/screen-mdpi-portrait.png" density="port-mdpi"/>
 		<splash src="res/screens/android/screen-xhdpi-portrait.png" density="port-xhdpi"/>
 	...
+```
+
+### Adding Basic App Framework for Plugin Testing
+We will be adding a basic app framework called Ratchet for creating small examples to test our plugins.
+
+#### Step 1:
+Download the Ratched library which is very small ~ approx 52 KB from this url - https://github.com/twbs/ratchet/releases/download/v2.0.2/ratchet-2.0.2-dist.zip
+
+#### Step 2:
+Unzip the archive file downloaded which would contain folders - *css*, *js* and *fonts*.
+
+#### Step 3:
+Put the folders inside your *www* folder overriding existing folders.
+
+#### Step 4:
+Replace code in *index.html*, with the following basic template:
+
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Learning Cordova Sample Page</title>
+
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Include the compiled Ratchet CSS -->
+    <link href="css/ratchet.css" rel="stylesheet">
+	<link href="css/common.css" rel="stylesheet">
+
+    <!-- Include the compiled Ratchet JS -->
+    <script src="js/jquery.min.js"></script>
+	<script src="cordova.js"></script>
+	<script>
+		function loadPluginPage(pluginName) {
+		  $.get('plugins/'+pluginName+'.html').then(function(data) {
+			  document.getElementById('viewport').innerHTML = data;
+			  if(window[pluginName]){
+				  window[pluginName].call(window);
+			  }
+		  },function(error){
+			  debugger;
+		  });
+		}
+	</script>
+	<!-- <script src="cordova.js"></script> -->
+  </head>
+  <body>
+		<div id="viewport">
+		</div>
+	<script type="text/javascript">
+		loadPluginPage('index');
+	</script>
+</body>
+</html>     
+```
+
+#### Step 5:
+We need to create a new folder *plugins* where we will keep on adding examples for each cordova plugin we test or make a sample for. For now, create a new placeholder for all plugins example named *index.html* and place the following code in it:
+
+```
+<!-- Make sure all your bars are the first things in your <body> -->
+<header class="bar bar-nav">
+  <h1 class="title">Learning Cordova</h1>
+</header>    
+
+<!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->     
+<div class="content">      
+  <p class="content-padded">This is a sample app to run examples for Cordova Plugins. The list of cordova plugins and the link to their respective sections is given below:</p>    
+  <div class="card">      
+	<ul class="table-view">    
+	  <li class="table-view-cell">   
+		<a class="push-right" onClick="loadPluginPage('network')" href="#">    
+		  <strong>Network Plugin</strong>    
+		</a>    
+	  </li>    
+	  <li class="table-view-cell">    
+		<a class="push-right" href="plugins/plugin1.html">    
+		  <strong>Upcoming Plugin...</strong>    
+		</a>    
+	  </li>   
+	</ul>    
+  </div>    
+</div>    
+
+```
+
+### Cordova Network Plugin
+We will be making a sample for working with Cordova Network Plugin.
+
+#### Step 1:
+Add the plugin by running the following command:
+
+`cordova plugin add cordova-plugin-network-information`
+
+#### Step 2:
+Add a new file *network.html* inside *plugins* folder.
+
+```
+<header class="bar bar-nav">     
+	<a class="icon icon-left-nav pull-left" href="#"></a>      
+	<h1 class="title">Network Plugin</h1>     
+</header>      
+
+<div class="content">     
+	<h3>Events Testing</h3>    
+	<p>   
+		Network Status: <span id="network_status">UNKOWN</span><br>   
+		Status Light : <br>   
+		<div id="light" class="circle"></div><br>    
+		Connection Type: <span id="connection_type">UNKOWN</span>    
+	</p>    
+</div>   
+
+```
+
+#### Step 3:
+Add a new file *network.js* inside *js/plugins* folder. This file will contain a function with the same name of the plugin i.e. *'network'* and we will include any functionality to test the network plugin in this.
+
+```javascript
+function network(){
+	document.addEventListener('deviceready',onDeviceReady,false);
+	function onDeviceReady(){
+		console.log('Device is Ready');
+		document.addEventListener('online',onOnline,false);
+		document.addEventListener('offline',onOffline,false);
+
+		function onOnline(){
+			console.log('Now Online');
+			$('#network_status').html('Online');
+			$('#light').addClass('online');
+			$('#light').removeClass('offline');
+			$('#connection_type').html(checkConnectionType());
+		}
+
+		function onOffline(){
+			console.log('Now Offline');
+			$('#network_status').html('Offline');
+			$('#light').addClass('offline');
+			$('#light').removeClass('online');
+			$('#connection_type').html(checkConnectionType());
+		}
+
+		function checkConnectionType(){
+			var networkState = navigator.connection.type;
+
+		    var states = {};
+		    states[Connection.UNKNOWN]  = 'Unknown connection';
+		    states[Connection.ETHERNET] = 'Ethernet connection';
+		    states[Connection.WIFI]     = 'WiFi connection';
+		    states[Connection.CELL_2G]  = 'Cell 2G connection';
+		    states[Connection.CELL_3G]  = 'Cell 3G connection';
+		    states[Connection.CELL_4G]  = 'Cell 4G connection';
+		    states[Connection.CELL]     = 'Cell generic connection';
+		    states[Connection.NONE]     = 'No network connection';
+
+		    return states[networkState];
+		}
+	}
+}
 ```
