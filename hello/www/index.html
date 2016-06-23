@@ -13,36 +13,31 @@
 
     <!-- Include the compiled Ratchet CSS -->
     <link href="css/ratchet.css" rel="stylesheet">
+	<link href="css/common.css" rel="stylesheet">
 
     <!-- Include the compiled Ratchet JS -->
-    <script src="js/ratchet.js"></script>
-	<script src="js/cordova.js"></script>
+    <script src="js/jquery.min.js"></script>
+	<script src="cordova.js"></script>
+	<script>
+		function loadPluginPage(pluginName) {
+		  $.get('plugins/'+pluginName+'.html').then(function(data) {
+			  document.getElementById('viewport').innerHTML = data;
+			  if(window[pluginName]){
+				  window[pluginName].call(window);
+			  }
+		  },function(error){
+			  debugger;
+		  });
+		}
+	</script>
+	<!-- <script src="cordova.js"></script> -->
   </head>
   <body>
-
-    <!-- Make sure all your bars are the first things in your <body> -->
-    <header class="bar bar-nav">
-      <h1 class="title">Learning Cordova</h1>
-    </header>
-
-    <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
-    <div class="content">
-      <p class="content-padded">This is a sample app to run examples for Cordova Plugins. The list of cordova plugins and the link to their respective sections is given below:</p>
-      <div class="card">
-        <ul class="table-view">
-          <li class="table-view-cell">
-            <a class="push-right" href="plugins/plugin1.html">
-              <strong>Plugin 1</strong>
-            </a>
-          </li>
-          <li class="table-view-cell">
-            <a class="push-right" href="#">
-              <strong>Upcoming Plugin...</strong>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-  </body>
+		<div id="viewport">
+		</div>
+	<script src="js/plugins/network.js"></script>
+	<script type="text/javascript">
+		loadPluginPage('network');
+	</script>
+</body>
 </html>
