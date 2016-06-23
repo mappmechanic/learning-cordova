@@ -1,7 +1,7 @@
 function camera(){
 	document.addEventListener('deviceready',onDeviceReady,false);
 	function onDeviceReady(){
-		alert('Device is Ready');
+		console.log('Device is Ready');
 		window.takeNewPicture = takeNewPicture;
 
 		function takeNewPicture() {

@@ -14,6 +14,8 @@ I am writing a Repository to help beginners in Learning Cordova. This Repository
 5. [Icons & SplashScreens](https://github.com/mappmechanic/learning-cordova#icons-and-splashscreens)
 6. [Adding Basic App Framework for Plugin Testing]
 7. Cordova Network Plugin
+8. Cordova Camera Plugin
+9. Cordova Contacts Plugin
 
 ## Code Samples with Steps :
 
@@ -414,3 +416,53 @@ Add the plugin by running the following command:
 
 #### Step 2:
 Add a new file *camera.html* inside *plugins* folder.
+
+```
+<header class="bar bar-nav">   
+	<a class="icon icon-left-nav pull-left" href="#"></a>    
+	<h1 class="title">Camera Plugin</h1>   
+</header>   
+
+<div class="content">   
+	<h3>Camera Methods Testing</h3>    
+	<p>    
+		<button class="btn" onClick="takeNewPicture()">    
+			Get a New Picture    
+		</button>   
+	</p>   
+	<p>   
+		<img id="new_img" class="hidden" src="">    
+	</p>    
+</div>    
+```
+
+#### Step 3:
+Add a new file *camera.js* inside *js/plugins* folder. This file will contain sample code for Camera plugin testing.
+
+```javascript
+function camera(){
+	document.addEventListener('deviceready',onDeviceReady,false);
+	function onDeviceReady(){
+		console.log('Device is Ready');
+		window.takeNewPicture = takeNewPicture;
+
+		function takeNewPicture() {
+			var cameraOptions = {
+				destinationType:Camera.DestinationType.FILE_URI,
+				sourceType:Camera.PictureSourceType.CAMERA
+			};
+			navigator.camera.getPicture(successCallback,errorCallback,cameraOptions);
+
+			function successCallback(imageData){
+				var image = $('#new_image');
+				image.removeClass('hidden');
+  				image.src = "data:image/jpeg;base64," + imageData;
+			}
+
+			function errorCallback(message){
+				alert('Error Occurred: '+message);
+			}
+		}
+	}
+}
+```
