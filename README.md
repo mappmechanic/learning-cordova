@@ -11,7 +11,7 @@ I am writing a Repository to help beginners in Learning Cordova. This Repository
 2. [Cordova Hooks](https://github.com/mappmechanic/learning-cordova#cordova-hooks-)
 3. [Customize App Properties](https://github.com/mappmechanic/learning-cordova#cordova-app-properties)
 4. [Cordova LifeCycle Events](https://github.com/mappmechanic/learning-cordova#cordova-lifecycle-events)
-5. Icons & SplashScreens
+5. [Icons & SplashScreens](https://github.com/mappmechanic/learning-cordova#icons-and-splashscreens)
 
 ## Code Samples with Steps :
 
