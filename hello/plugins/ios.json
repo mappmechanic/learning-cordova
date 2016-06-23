@@ -9,6 +9,9 @@
     "installed_plugins": {
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.mappmechanic.learncordova"
         }
     },
     "dependent_plugins": {}
