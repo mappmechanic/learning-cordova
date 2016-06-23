@@ -11,6 +11,7 @@ I am writing a Repository to help beginners in Learning Cordova. This Repository
 2. [Cordova Hooks](https://github.com/mappmechanic/learning-cordova#cordova-hooks-)
 3. [Customize App Properties](https://github.com/mappmechanic/learning-cordova#cordova-app-properties)
 4. [Cordova LifeCycle Events](https://github.com/mappmechanic/learning-cordova#cordova-lifecycle-events)
+5. Icons & SplashScreens
 
 ## Code Samples with Steps :
 
@@ -194,3 +195,44 @@ We can listen to the event which is fired whenever the app is paused as it is ta
 We can listen to the event which is fired whenever the app is resumed as it is taken into focus by the user.
 
 `document.addEventListener("resume", this.onResume false)`
+
+### Icons and SplashScreens
+In a Cordova Project, by default the cordova logo is put as icon and splash screens if we do not replace them. In order to replace them we can make any folder in our Cordova Project and store the images for icons and splash screens.
+
+#### Step 1:
+For this project demo, we will make a folder named *res* and then have different folders for different platforms in it. We have to link that image with appropriate size device, which can be configured in the config.xml as follows:
+
+```
+	<icon src="res/icons/ios/icon.png" platform="ios" width="57" height="57" density="mdpi" />
+
+	<platform name="android">
+		<icon src="res/icons/android/ldpi.png" density="ldpi" />
+		<icon src="res/icons/android/mdpi.png" density="mdpi" />
+		<icon src="res/icons/android/hdpi.png" density="hdpi" />
+		<icon src="res/icons/android/xhdpi.png" density="xhdpi" />
+		<icon src="res/icons/android/xxhdpi.png" density="xxhdpi" />
+		<icon src="res/icons/android/xxxhdpi.png" density="xxxhdpi" />
+	</platform>
+```
+
+#### Step 2:
+Run or build your cordova project so that cordova cli can copy these assets into their native platform codebase.
+
+`cordova run|build`
+
+#### Step 3:
+Adding splash screens to your project is also similar to adding icons. For splash screens to work we need to add the plugin for splash screens:
+
+`cordova plugin add cordova-plugin-splashscreen`
+
+Please add the following configuration in the platform tag for android.
+
+```
+	...
+	<!-- Splash Screens -->
+		<splash src="res/screens/android/screen-hdpi-portrait.png" density="port-hdpi"/>
+		<splash src="res/screens/android/screen-ldpi-portrait.png" density="port-ldpi"/>
+		<splash src="res/screens/android/screen-mdpi-portrait.png" density="port-mdpi"/>
+		<splash src="res/screens/android/screen-xhdpi-portrait.png" density="port-xhdpi"/>
+	...
+```
