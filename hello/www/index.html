@@ -1,43 +1,49 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Learning Cordova Sample Page</title>
+	<head>
+	    <meta charset="utf-8">
+	    <title>Learning Cordova Sample Page</title>
 
-    <!-- Sets initial viewport load and disables zooming  -->
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+	    <!-- Sets initial viewport load and disables zooming  -->
+	    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 
-    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <!-- Include the compiled Ratchet CSS -->
-    <link href="css/ratchet.css" rel="stylesheet">
-	<link href="css/common.css" rel="stylesheet">
+	    <!-- Include the compiled Phonon CSS -->
+	    <link href="css/phonon.css" rel="stylesheet">
+		<link href="css/common.css" rel="stylesheet">
 
-    <!-- Include the compiled Ratchet JS -->
-    <script src="js/jquery.min.js"></script>
-	<script src="cordova.js"></script>
-	<script>
-		function loadPluginPage(pluginName) {
-		  $.get('plugins/'+pluginName+'.html').then(function(data) {
-			  document.getElementById('viewport').innerHTML = data;
-			  if(window[pluginName]){
-				  window[pluginName].call(window);
-			  }
-		  },function(error){
-			  debugger;
-		  });
-		}
-	</script>
-	<!-- <script src="cordova.js"></script> -->
-  </head>
-  <body>
-		<div id="viewport">
-		</div>
-	<script src="js/plugins/network.js"></script>
-	<script type="text/javascript">
-		loadPluginPage('network');
-	</script>
-</body>
+	</head>
+	<body>
+		<!-- the home page is the default one. This page does not require to call its content because we define on its tag.-->
+        <home data-page="true">
+
+            <header class="header-bar">
+                <div class="center">
+                    <h1 class="title">Cordova Plugins</h1>
+                </div>
+            </header>
+            <div class="content">
+
+                <ul class="list">
+                    <li class="divider">Select a plugin</li>
+                    <li><a class="padded-list" href="#!network">Network Plugin</a></li>
+                    <li><a class="padded-list" href="#!camera">Camera Plugin</a></li>
+                </ul>
+
+            </div>
+        </home>
+
+        <network data-page="true"></network>
+		<camera data-page="true"></camera>
+
+		<!-- Include the compiled Phonon JS -->
+		<script src="js/phonon.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/plugins/camera.js"></script>
+		<script src="cordova.js"></script>
+	</body>
 </html>
