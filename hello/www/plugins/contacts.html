@@ -1,16 +1,28 @@
-<header class="bar bar-nav">
-	<a class="icon icon-left-nav pull-left" href="#"></a>
-	<h1 class="title">Contacts Plugin</h1>
-</header>
+<contacts class="app-page">
+    <header class="header-bar">
+        <div class="center">
+            <button class="btn pull-left icon icon-arrow-back" data-navigation="$previous-page"></button>
+            <h1 class="title">Contacts Plugin</h1>
+        </div>
+    </header>
 
-<div class="content">
-	<h3>Contacts Methods Testing</h3>
-	<p>
-		<button class="btn" onClick="pickAContact()">
-			Pick A Contact
-		</button>
-	</p>
-	<p id="selected_contact">
-		
-	</p>
-</div>
+    <div class="content">
+			<ul class="list">
+			   <li class="divider">Test Contact Actions</li>
+			   <li class="padded-list">
+				    <button class="btn primary" id="pickContactBtn" data-order="pickAContact">Pick a Contact</button>
+			   </li>
+			   <li class="divider">Selected Contact</li>
+			   <li class="padded-list">
+					<table id="selected_contact" class="table hidden">
+				        <tbody>
+				            <tr><td>Display Name</td><td id="display_name"></td></tr>
+							<tr><td>Mobile</td><td id="mobile_number"></td></tr>
+							<tr><td>Email</td><td id="email"></td></tr>
+							<tr><td>Organisation</td><td id="organisation"></td></tr>
+				        </tbody>
+				    </table>
+			   </li>
+		   </ul>
+    </div>
+</contacts>

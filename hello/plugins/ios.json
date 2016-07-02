@@ -18,6 +18,9 @@
         },
         "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.mappmechanic.learncordova"
+        },
+        "cordova-plugin-contacts": {
+            "PACKAGE_NAME": "com.mappmechanic.learncordova"
         }
     },
     "dependent_plugins": {

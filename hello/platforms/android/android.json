@@ -23,6 +23,10 @@
                         {
                             "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Contacts\"><param name=\"android-package\" value=\"org.apache.cordova.contacts.ContactManager\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -36,6 +40,18 @@
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.READ_CONTACTS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\" />",
                             "count": 1
                         }
                     ]
@@ -57,6 +73,9 @@
             "PACKAGE_NAME": "com.mappmechanic.learncordova"
         },
         "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.mappmechanic.learncordova"
+        },
+        "cordova-plugin-contacts": {
             "PACKAGE_NAME": "com.mappmechanic.learncordova"
         }
     },
@@ -111,6 +130,73 @@
             "clobbers": [
                 "CameraPopoverHandle"
             ]
+        },
+        {
+            "file": "plugins/cordova-plugin-contacts/www/contacts.js",
+            "id": "cordova-plugin-contacts.contacts",
+            "clobbers": [
+                "navigator.contacts"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-contacts/www/Contact.js",
+            "id": "cordova-plugin-contacts.Contact",
+            "clobbers": [
+                "Contact"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-contacts/www/convertUtils.js",
+            "id": "cordova-plugin-contacts.convertUtils"
+        },
+        {
+            "file": "plugins/cordova-plugin-contacts/www/ContactAddress.js",
+            "id": "cordova-plugin-contacts.ContactAddress",
+            "clobbers": [
+                "ContactAddress"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-contacts/www/ContactError.js",
+            "id": "cordova-plugin-contacts.ContactError",
+            "clobbers": [
+                "ContactError"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-contacts/www/ContactField.js",
+            "id": "cordova-plugin-contacts.ContactField",
+            "clobbers": [
+                "ContactField"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-contacts/www/ContactFindOptions.js",
+            "id": "cordova-plugin-contacts.ContactFindOptions",
+            "clobbers": [
+                "ContactFindOptions"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-contacts/www/ContactName.js",
+            "id": "cordova-plugin-contacts.ContactName",
+            "clobbers": [
+                "ContactName"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-contacts/www/ContactOrganization.js",
+            "id": "cordova-plugin-contacts.ContactOrganization",
+            "clobbers": [
+                "ContactOrganization"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-contacts/www/ContactFieldType.js",
+            "id": "cordova-plugin-contacts.ContactFieldType",
+            "merges": [
+                ""
+            ]
         }
     ],
     "plugin_metadata": {
@@ -118,6 +204,7 @@
         "cordova-plugin-splashscreen": "3.2.2",
         "cordova-plugin-network-information": "1.2.1",
         "cordova-plugin-compat": "1.0.0",
-        "cordova-plugin-camera": "2.2.0"
+        "cordova-plugin-camera": "2.2.0",
+        "cordova-plugin-contacts": "2.1.0"
     }
 }
