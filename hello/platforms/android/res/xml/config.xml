@@ -18,6 +18,9 @@
     <feature name="Contacts">
         <param name="android-package" value="org.apache.cordova.contacts.ContactManager" />
     </feature>
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
     <hook src="hooks/afterBuildAndroid.js" type="after_build" />
     <icon density="ldpi" src="res/icons/android/ldpi.png" />
     <icon density="mdpi" src="res/icons/android/mdpi.png" />

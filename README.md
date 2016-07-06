@@ -245,10 +245,10 @@ Please add the following configuration in the platform tag for android.
 We will be adding a basic app framework called Ratchet for creating small examples to test our plugins.
 
 #### Step 1:
-Download the Ratched library which is very small ~ approx 52 KB from this url - https://github.com/twbs/ratchet/releases/download/v2.0.2/ratchet-2.0.2-dist.zip
+Download the Phonon library which is very small ~ approx 61 KB from this url - https://github.com/quark-dev/Phonon-Framework/archive/master.zip
 
 #### Step 2:
-Unzip the archive file downloaded which would contain folders - *css*, *js* and *fonts*.
+Unzip the archive file downloaded which would contain a folder *dist* in which there will be  sub-folders - *css*, *js* and *fonts*.
 
 #### Step 3:
 Put the folders inside your *www* folder overriding existing folders.
@@ -271,64 +271,124 @@ Replace code in *index.html*, with the following basic template:
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
     <!-- Include the compiled Ratchet CSS -->
-    <link href="css/ratchet.css" rel="stylesheet">
+    <link href="css/phonon.css" rel="stylesheet">
 	<link href="css/common.css" rel="stylesheet">
-
-    <!-- Include the compiled Ratchet JS -->
-    <script src="js/jquery.min.js"></script>
-	<script src="cordova.js"></script>
-	<script>
-		function loadPluginPage(pluginName) {
-		  $.get('plugins/'+pluginName+'.html').then(function(data) {
-			  document.getElementById('viewport').innerHTML = data;
-			  if(window[pluginName]){
-				  window[pluginName].call(window);
-			  }
-		  },function(error){
-			  debugger;
-		  });
-		}
-	</script>
-	<!-- <script src="cordova.js"></script> -->
   </head>
   <body>
-		<div id="viewport">
-		</div>
-	<script type="text/javascript">
-		loadPluginPage('index');
-	</script>
-</body>
+	  <!-- the home page is the default one. This page does not require to call its content because we define on its tag.-->
+	  <home data-page="true">
+		  <header class="header-bar">
+			  <div class="center">
+				  <h1 class="title">Cordova Plugins</h1>
+			  </div>
+		  </header>
+		  <div class="content">
+			  <ul class="list">
+				  <li class="divider">Select a plugin</li>
+				  <li><a class="padded-list" href="#!device">Device Plugin</a></li>
+			  </ul>
+		  </div>
+	  </home>
+	  <device data-page="true"></device>
+	  <!-- More Plugin Tags will be Added Later Here-->
+
+	  <!-- Include the compiled Phonon JS -->
+	  <script src="js/phonon.js"></script>
+	  <script src="js/jquery.min.js"></script>
+	  <script src="js/app.js"></script>
+	  <script src="js/plugins/device.js"></script>
+	  <script src="cordova.js"></script>
+  </body>
 </html>     
 ```
 
-#### Step 5:
-We need to create a new folder *plugins* where we will keep on adding examples for each cordova plugin we test or make a sample for. For now, create a new placeholder for all plugins example named *index.html* and place the following code in it:
+#### Step 7:
+In order to initiate the Phonon Library, we will write bootstrapping code in */js/app.js* file. We will have to initiate an instance of Phonon App and also instantiate *home* view.
+
+```javascript
+var isDeviceReady = false;   
+phonon.options({   
+    navigator: {   
+        defaultPage: 'home',    
+        animatePages: true,   
+        enableBrowserBackButton: true,   
+        templateRootDirectory: './plugins'  
+    }
+});
+
+function deviceReady(done){
+	if(deviceReady){
+		done();
+	}else {
+		document.addEventListener('deviceReady',onDeviceReady,false);
+	}
+	function onDeviceReady(){
+		isDeviceReady = true;
+		done();
+	}
+}
+var app = phonon.navigator();
+app.on({page: 'home', preventClose: false, content: null});
+
+// Let's go!
+app.start();
+```
+
+#### Step 6:
+We need to create a new folder *plugins* inside *js* folder and also another *plugins* folder inside *www* folder itself, where we will keep on adding examples for each cordova plugin we test or make a sample for. For now, create a new file *device.html* inside */www/plugins* for testing the most basic device plugin:
 
 ```
-<!-- Make sure all your bars are the first things in your <body> -->
-<header class="bar bar-nav">
-  <h1 class="title">Learning Cordova</h1>
-</header>    
+<device class="app-page">    
+    <header class="header-bar">    
+        <div class="center">       
+            <button class="btn pull-left icon icon-arrow-back" data-navigation="$previous-page"></button>   
+            <h1 class="title">Device Plugin</h1>   
+        </div>   
+    </header>    
 
-<!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->     
-<div class="content">      
-  <p class="content-padded">This is a sample app to run examples for Cordova Plugins. The list of cordova plugins and the link to their respective sections is given below:</p>    
-  <div class="card">      
-	<ul class="table-view">    
-	  <li class="table-view-cell">   
-		<a class="push-right" onClick="loadPluginPage('network')" href="#">    
-		  <strong>Network Plugin</strong>    
-		</a>    
-	  </li>    
-	  <li class="table-view-cell">    
-		<a class="push-right" href="plugins/plugin1.html">    
-		  <strong>Upcoming Plugin...</strong>    
-		</a>    
-	  </li>   
-	</ul>    
-  </div>    
-</div>    
+    <div class="content">   
+			<ul class="list device-info">   
+			   <li class="divider">Device Information</li>   
+			   <li class="padded-list">   
+				    Model - <span id="model"></span>   
+			   </li>   
+			   <li class="padded-list">   
+				    Manufacturer - <span id="manufacturer"></span>   
+			   </li>    
+			   <li class="padded-list">   
+				    Platform/OS - <span id="platform"></span>    
+			   </li>   
+			   <li class="padded-list">   
+				    Version - <span id="version"></span>   
+			   </li>    
+			   <li class="padded-list">   
+				    Serial No - <span id="serial"></span>    
+			   </li>    
+			   <li class="padded-list">    
+				    UUID - <span id="uuid"></span>    
+			   </li>     
+		   </ul>    
+    </div>   
+</device>    
 
+```
+
+#### Step 7:
+Now we have to add the JS functionality to access the *window.device* object and put the properties of this project into html dom elements using their unique ids.
+
+```javascript
+app.on({page: 'device', preventClose: false, content: 'device.html', readyDelay: 1}, function(activity) {
+	activity.onCreate(function() {
+		deviceReady(function(){
+			$('#model').html(device.model);
+			$('#manufacturer').html(device.manufacturer);
+			$('#platform').html(device.model);
+			$('#version').html(device.version);
+			$('#serial').html(device.serial);
+			$('#uuid').html(device.uuid);
+		});
+    });
+});
 ```
 
 ### Cordova Network Plugin
@@ -343,67 +403,121 @@ Add the plugin by running the following command:
 Add a new file *network.html* inside *plugins* folder.
 
 ```
-<header class="bar bar-nav">     
-	<a class="icon icon-left-nav pull-left" href="#"></a>      
-	<h1 class="title">Network Plugin</h1>     
-</header>      
+<network class="app-page">    
+    <header class="header-bar">    
+        <div class="center">    
+            <button class="btn pull-left icon icon-arrow-back" data-navigation="$previous-page"></button>     
+            <h1 class="title">Network Plugin</h1>    
+        </div>    
+    </header>     
 
-<div class="content">     
-	<h3>Events Testing</h3>    
-	<p>   
-		Network Status: <span id="network_status">UNKOWN</span><br>   
-		Status Light : <br>   
-		<div id="light" class="circle"></div><br>    
-		Connection Type: <span id="connection_type">UNKOWN</span>    
-	</p>    
-</div>   
-
+    <div class="content">      
+        <div class="padded-full">   
+            <h3>Events Testing</h3>   
+		</div>   
+			<ul class="list">   
+			   <li class="divider">Connection Type</li>   
+			   <li class="padded-list" id="connection_type">Unkown</li>   
+			   <li class="divider">Connection Status</li>   
+			   <li class="padded-list">   
+					<div id="light" class="circle">   
+					</div>   
+					<span id="network_status">Unkown</span>   
+			   </li>   
+		   </ul>   
+    </div>   
+</newtork>   
 ```
 
 #### Step 3:
+In the *index.html* file please add the following *<network>* tag after the rest of the plugins.
+
+```
+<!-- More Plugin Tags will be Added Later Here-->    
+<network data-page="true"></network>    
+```
+
+Also in the same file, add reference to a new JS file which we will be creating in next step at last of the body tag.
+```
+<script src="js/plugins/network.js"></script>
+```
+
+#### Step 4:
 Add a new file *network.js* inside *js/plugins* folder. This file will contain a function with the same name of the plugin i.e. *'network'* and we will include any functionality to test the network plugin in this.
 
 ```javascript
-function network(){
-	document.addEventListener('deviceready',onDeviceReady,false);
-	function onDeviceReady(){
-		console.log('Device is Ready');
-		document.addEventListener('online',onOnline,false);
-		document.addEventListener('offline',onOffline,false);
 
-		function onOnline(){
-			console.log('Now Online');
-			$('#network_status').html('Online');
-			$('#light').addClass('online');
-			$('#light').removeClass('offline');
-			$('#connection_type').html(checkConnectionType());
-		}
+app.on({page: 'network', preventClose: false, content: 'network.html', readyDelay: 1}, function(activity) {
+	activity.onCreate(function() {
+	       deviceReady(function() {
+	   		console.log('Device is Ready');
+	   		document.addEventListener('online',onOnline,false);
+	   		document.addEventListener('offline',onOffline,false);
 
-		function onOffline(){
-			console.log('Now Offline');
-			$('#network_status').html('Offline');
-			$('#light').addClass('offline');
-			$('#light').removeClass('online');
-			$('#connection_type').html(checkConnectionType());
-		}
+	   		if(navigator.connection.type === Connection.UNKNOWN || navigator.connection.type === Connection.NONE){
+	   			onOffline();
+	   		}else {
+	   			onOnline();
+	   		}
 
-		function checkConnectionType(){
-			var networkState = navigator.connection.type;
+	   		function onOnline(){
+	   			console.log('Now Online');
+	   			$('#network_status').html('Online');
+	   			$('#light').addClass('online');
+	   			$('#light').removeClass('offline');
+	   			$('#connection_type').html(checkConnectionType());
+	   		}
 
-		    var states = {};
-		    states[Connection.UNKNOWN]  = 'Unknown connection';
-		    states[Connection.ETHERNET] = 'Ethernet connection';
-		    states[Connection.WIFI]     = 'WiFi connection';
-		    states[Connection.CELL_2G]  = 'Cell 2G connection';
-		    states[Connection.CELL_3G]  = 'Cell 3G connection';
-		    states[Connection.CELL_4G]  = 'Cell 4G connection';
-		    states[Connection.CELL]     = 'Cell generic connection';
-		    states[Connection.NONE]     = 'No network connection';
+	   		function onOffline(){
+	   			console.log('Now Offline');
+	   			$('#network_status').html('Offline');
+	   			$('#light').addClass('offline');
+	   			$('#light').removeClass('online');
+	   			$('#connection_type').html(checkConnectionType());
+	   		}
 
-		    return states[networkState];
-		}
-	}
-}
+	   		function checkConnectionType(){
+	   			var networkState = navigator.connection.type;
+
+	   		    var states = {};
+	   		    states[Connection.UNKNOWN]  = 'Unknown connection';
+	   		    states[Connection.ETHERNET] = 'Ethernet connection';
+	   		    states[Connection.WIFI]     = 'WiFi connection';
+	   		    states[Connection.CELL_2G]  = 'Cell 2G connection';
+	   		    states[Connection.CELL_3G]  = 'Cell 3G connection';
+	   		    states[Connection.CELL_4G]  = 'Cell 4G connection';
+	   		    states[Connection.CELL]     = 'Cell generic connection';
+	   		    states[Connection.NONE]     = 'No network connection';
+
+	   		    return states[networkState];
+	   		}
+	   	});
+    });
+});
+```
+
+#### Step 5:
+Add following CSS to your */css/common.css* file
+
+```
+#light.circle {  
+	width:40px;  
+	height:40px;  
+	border-radius:20px;  
+	border:0px;  
+	background-color:blue;  
+	float:left;  
+	margin-right:10px;  
+	margin-top:5px;  
+}  
+
+#light.offline{  
+	background-color:red;  
+}  
+
+#light.online{  
+	background-color:green;  
+}  
 ```
 
 ### Cordova Camera Plugin
@@ -418,53 +532,78 @@ Add the plugin by running the following command:
 Add a new file *camera.html* inside *plugins* folder.
 
 ```
-<header class="bar bar-nav">   
-	<a class="icon icon-left-nav pull-left" href="#"></a>    
-	<h1 class="title">Camera Plugin</h1>   
-</header>   
+<camera class="app-page">  
+    <header class="header-bar">   
+        <div class="center">  
+            <button class="btn pull-left icon icon-arrow-back" data-navigation="$previous-page"></button>   
+            <h1 class="title">Camera Plugin</h1>   
+        </div>   
+    </header>   
 
-<div class="content">   
-	<h3>Camera Methods Testing</h3>    
-	<p>    
-		<button class="btn" onClick="takeNewPicture()">    
-			Get a New Picture    
-		</button>   
-	</p>   
-	<p>   
-		<img id="new_img" class="hidden" src="">    
-	</p>    
-</div>    
+    <div class="content">   
+			<ul class="list">   
+			   <li class="divider">Take a Picture</li>   
+			   <li class="padded-list">   
+				    <button class="btn primary" id="cameraBtn" data-order="takePicture">Take a Picture</button>   
+			   </li>   
+			   <li class="divider">Picture</li>   
+			   <li class="padded-list">   
+					<img id="new_image" class="hidden" />   
+			   </li>   
+		   </ul>   
+    </div>  
+</camera>    
 ```
 
 #### Step 3:
+In the *index.html* file please add the following *<camera>* tag after the rest of the plugins.
+
+```
+<!-- More Plugin Tags will be Added Later Here-->    
+<camera data-page="true"></camera>    
+```
+
+Also in the same file, add reference to a new JS file which we will be creating in next step at last of the body tag.
+```
+<script src="js/plugins/camera.js"></script>
+```
+
+
+#### Step 4:
 Add a new file *camera.js* inside *js/plugins* folder. This file will contain sample code for Camera plugin testing.
 
 ```javascript
-function camera(){
-	document.addEventListener('deviceready',onDeviceReady,false);
-	function onDeviceReady(){
-		console.log('Device is Ready');
-		window.takeNewPicture = takeNewPicture;
+app.on({page: 'camera', preventClose: false, content: 'camera.html', readyDelay: 1}, function(activity) {
+	var onAction = function(evt) {
+        var target = evt.target;
 
-		function takeNewPicture() {
-			var cameraOptions = {
-				destinationType:Camera.DestinationType.FILE_URI,
-				sourceType:Camera.PictureSourceType.CAMERA
-			};
-			navigator.camera.getPicture(successCallback,errorCallback,cameraOptions);
+        if(target.getAttribute('data-order') === 'takePicture') {
+            deviceReady(function(){
+				var cameraOptions = {
+					destinationType:Camera.DestinationType.DATA_URL,
+					sourceType:Camera.PictureSourceType.CAMERA
+				};
+				navigator.camera.getPicture(successCallback,errorCallback,cameraOptions);
 
-			function successCallback(imageData){
-				var image = $('#new_image');
-				image.removeClass('hidden');
-  				image.src = "data:image/jpeg;base64," + imageData;
-			}
+				function successCallback(imageData){
+					var image = $('#new_image');
+					image.removeClass('hidden');
+					image.attr('src',"data:image/jpeg;base64," + imageData);
+				}
 
-			function errorCallback(message){
-				alert('Error Occurred: '+message);
-			}
-		}
-	}
-}
+				function errorCallback(message){
+					alert('Error Occurred: '+message);
+				}
+			});
+        } else {
+            phonon.alert('Your order has been canceled.', 'Dear customer');
+        }
+    };
+
+	activity.onCreate(function() {
+		document.getElementById('cameraBtn').on('tap',onAction);
+    });
+});
 ```
 
 
@@ -480,51 +619,81 @@ Add the plugin by running the following command:
 Add a new file *contacts.html* inside *plugins* folder.
 
 ```
-<header class="bar bar-nav">   
-	<a class="icon icon-left-nav pull-left" href="#"></a>    
-	<h1 class="title">Camera Plugin</h1>   
-</header>   
+<contacts class="app-page">   
+    <header class="header-bar">   
+        <div class="center">  
+            <button class="btn pull-left icon icon-arrow-back" data-navigation="$previous-page"></button>   
+            <h1 class="title">Contacts Plugin</h1>   
+        </div>   
+    </header>   
 
-<div class="content">   
-	<h3>Camera Methods Testing</h3>    
-	<p>    
-		<button class="btn" onClick="takeNewPicture()">    
-			Get a New Picture    
-		</button>   
-	</p>   
-	<p>   
-		<img id="new_img" class="hidden" src="">    
-	</p>    
-</div>    
+    <div class="content">  
+			<ul class="list">   
+			   <li class="divider">Test Contact Actions</li>   
+			   <li class="padded-list">   
+				    <button class="btn primary" id="pickContactBtn" data-order="pickAContact">Pick a Contact</button>   
+			   </li>   
+			   <li class="divider">Selected Contact</li>   
+			   <li class="padded-list">   
+					<table id="selected_contact" class="table hidden">   
+				        <tbody>   
+				            <tr><td>Display Name</td><td id="display_name"></td></tr>    
+							<tr><td>Mobile</td><td id="mobile_number"></td></tr>   
+							<tr><td>Email</td><td id="email"></td></tr>   
+							<tr><td>Organisation</td><td id="organisation"></td></tr>   
+				        </tbody>    
+				    </table>   
+			   </li>   
+		   </ul>   
+    </div>  
+</contacts>   
+```
+#### Step 3:
+In the *index.html* file please add the following *<contacts>* tag after the rest of the plugins.
+
+```
+<!-- More Plugin Tags will be Added Later Here-->    
+<contacts data-page="true"></contacts>    
 ```
 
-#### Step 3:
-Add a new file *camera.js* inside *js/plugins* folder. This file will contain sample code for Camera plugin testing.
+Also in the same file, add reference to a new JS file which we will be creating in next step at last of the body tag.
+```
+<script src="js/plugins/contacts.js"></script>
+```
+
+
+#### Step 4:
+Add a new file *contacts.js* inside *js/plugins* folder. This file will contain sample code for Contacts plugin testing.
 
 ```javascript
-function camera(){
-	document.addEventListener('deviceready',onDeviceReady,false);
-	function onDeviceReady(){
-		console.log('Device is Ready');
-		window.takeNewPicture = takeNewPicture;
 
-		function takeNewPicture() {
-			var cameraOptions = {
-				destinationType:Camera.DestinationType.FILE_URI,
-				sourceType:Camera.PictureSourceType.CAMERA
-			};
-			navigator.camera.getPicture(successCallback,errorCallback,cameraOptions);
+app.on({page: 'contacts', preventClose: false, content: 'contacts.html', readyDelay: 1}, function(activity) {
+	var onAction = function(evt) {
+        var target = evt.target;
 
-			function successCallback(imageData){
-				var image = $('#new_image');
-				image.removeClass('hidden');
-  				image.src = "data:image/jpeg;base64," + imageData;
-			}
+        if(target.getAttribute('data-order') === 'pickAContact') {
+            deviceReady(function(){
+				navigator.contacts.pickContact(successCallback,errorCallback);
 
-			function errorCallback(message){
-				alert('Error Occurred: '+message);
-			}
-		}
-	}
-}
+				function successCallback(contact){
+					$('#selected_contact').removeClass('hidden');
+					$('#display_name').html(contact["displayName"]);
+					$('#mobile_number').html(contact.phoneNumbers && contact.phoneNumbers[0] ? contact.phoneNumbers[0].value : 'N/A');
+					$('#email').html(contact.email && contact.email[0] ? contact.email[0].value : 'N/A');
+					$('#organisation').html(contact.organizations && contact.organizations[0] ? contact.organizations[0].name : 'N/A');
+				}
+
+				function errorCallback(message){
+					alert('Error Occurred: '+message);
+				}
+			});
+        } else {
+            phonon.alert('Your order has been canceled.', 'Dear customer');
+        }
+    };
+
+	activity.onCreate(function() {
+		document.getElementById('pickContactBtn').on('tap',onAction);
+    });
+});
 ```
