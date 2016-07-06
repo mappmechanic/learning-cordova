@@ -697,3 +697,48 @@ app.on({page: 'contacts', preventClose: false, content: 'contacts.html', readyDe
     });
 });
 ```
+
+#### Step 5:
+Now, we will implement functionality to create a new contact by adding new method in *contacts.js* file and also adding an event handler for creating a contact on click of a new button. We will also add a new Popup Panel which would contain form to create a new Contact.
+
+```javascript
+var createContact = function(){
+	var contactField = {
+		displayName:$('#contact_name').val(),
+		phoneNumbers:[new ContactField('mobile', $('#contact_number').val(), true)]
+	}
+	var newContact = navigator.contacts.create(contactField);
+	newContact.save(function(contact_obj){
+		alert('Successfully created a new contact.');
+		$('#contact_name').val('');
+		$('#contact_number').val('');
+	},function(error){
+		alert("Not able to save new contact: "+error);
+	});
+}
+
+activity.onCreate(function() {
+	document.getElementById('pickContactBtn').on('tap',onAction);
+	document.getElementById('createContactBtn').on('tap',createContact);
+});
+```
+
+HTML Content will be placed at last of the *<div class='content'>...</div>* tag inside *plugins/contacts.html*.
+
+```
+<a href="#" data-panel-id="createContactPanel" class="floating-action padded-full icon icon-add active primary"></a>
+<div id="createContactPanel" class="panel-full">
+	 <header class="header-bar">
+		 <a class="btn icon icon-close pull-right" href="#" data-panel-close="true"></a>
+		 <h1 class="title"> Create Contact </h1>
+	 </header>
+
+	 <div class="content padded-full">
+		  <ul class="list">
+			 <li><input type="text" id="contact_name" placeholder="Full name"></li>
+			 <li><input type="number" id="contact_number" placeholder="10 Digit Mobile Number"></li>
+			 <li><br><button id="createContactBtn" class="btn fit-parent primary">Save</button></li>
+		 </ul>
+	 </div>
+ </div>
+```
