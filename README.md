@@ -437,6 +437,11 @@ In the *index.html* file please add the following *<network>* tag after the rest
 <network data-page="true"></network>    
 ```
 
+Also we have to add the link item in the plugins list:
+```
+<li><a class="padded-list" href="#!network">Network Plugin</a></li>
+```
+
 Also in the same file, add reference to a new JS file which we will be creating in next step at last of the body tag.
 ```
 <script src="js/plugins/network.js"></script>
@@ -563,6 +568,11 @@ In the *index.html* file please add the following *<camera>* tag after the rest 
 <camera data-page="true"></camera>    
 ```
 
+Also we have to add the link item in the plugins list:
+```
+<li><a class="padded-list" href="#!camera">Camera Plugin</a></li>
+```
+
 Also in the same file, add reference to a new JS file which we will be creating in next step at last of the body tag.
 ```
 <script src="js/plugins/camera.js"></script>
@@ -656,6 +666,11 @@ In the *index.html* file please add the following *<contacts>* tag after the res
 <contacts data-page="true"></contacts>    
 ```
 
+Also we have to add the link item in the plugins list:
+```
+<li><a class="padded-list" href="#!contacts">Contacts Plugin</a></li>
+```
+
 Also in the same file, add reference to a new JS file which we will be creating in next step at last of the body tag.
 ```
 <script src="js/plugins/contacts.js"></script>
@@ -741,4 +756,153 @@ HTML Content will be placed at last of the *<div class='content'>...</div>* tag 
 		 </ul>
 	 </div>
  </div>
+```
+
+A small CSS change is also required to alter z-index of backdrop. Append the below given css to *common.css* file.
+```
+.backdrop-panel
+{
+	z-index:0;
+}
+```
+
+### Cordova Geolocation Plugin
+We will be making a sample for working with Cordova Contacts Plugin.
+
+#### Step 1:
+Add the plugin by running the following command:
+
+`cordova plugin add cordova-plugin-geolocation`
+
+#### Step 2:
+Add a new file *geolocation.html* inside *plugins* folder.
+
+```
+<geolocation class="app-page">   
+    <header class="header-bar">   
+        <div class="center">   
+            <button class="btn pull-left icon icon-arrow-back" data-navigation="$previous-page"></button>   
+            <h1 class="title">Geolocation Plugin</h1>   
+        </div>   
+    </header>    
+
+    <div class="content">   
+		<ul class="list device-info">   
+		   <li class="padded-list">   
+			   <button id="getCurrentLocBtn" class="btn fit-parent primary">Get Current Location</button>   
+		   </li>   
+		   <li class="padded-list">   
+			   <button id="watchPosBtn" class="btn fit-parent primary">Watch Position Changes</button>   
+		   </li>    
+		   <li class="padded-list">   
+			  <button id="clearWatchBtn" class="btn fit-parent primary">Stop Watching</button>    
+		  </li>   
+		</ul>      
+		<ul class="list" id="locationChanges">   
+			<li class="divider">Regular Location Watch</li>   
+		</ul>   
+		<div id="currentLocPanel" class="panel">   
+	        <header class="header-bar">   
+	            <a class="btn icon icon-close pull-right" href="#" data-panel-close="true"></a>   
+	            <h1 class="title"> Current GPS Location </h1>   
+	        </header>   
+
+	        <div class="content padded-full">   
+				 <ul class="list">   
+					<li>Latitude - <span id="clatitude"></span></li>   
+					<li>Longitude - <span id="clongitude"></span></li>    
+				</ul>    
+	        </div>   
+		</div>   
+    </div>   
+</geolocation>     
+```
+#### Step 3:
+In the *index.html* file please add the following *<geolocation>* tag after the rest of the plugins.
+
+```
+<!-- More Plugin Tags will be Added Later Here-->    
+<geolocation data-page="true"></geolocation>    
+```
+
+Also we have to add the link item in the plugins list:
+```
+<li><a class="padded-list" href="#!geolocation">Geolocation Plugin</a></li>
+```
+
+Also in the same file, add reference to a new JS file which we will be creating in next step at last of the body tag.
+```
+<script src="js/plugins/geolocation.js"></script>
+```
+
+
+#### Step 4:
+Add a new file *geolocation.js* inside *js/plugins* folder. This file will contain sample code for Geolocation plugin testing.
+
+```javascript
+app.on({page: 'geolocation', preventClose: false, content: 'geolocation.html', readyDelay: 1}, function(activity) {
+	function onError(error){
+		alert('Error Occurred with Code:' +error.code+ '\n & Message: '+error.message);
+	}
+
+	var commonWatchId;
+
+	var getCurrentLocation = function(evt) {
+		deviceReady(function(){
+			navigator.geolocation.getCurrentPosition(onSuccess,onError,{timeout:30000})
+		});
+
+		function onSuccess(position){
+			$('#clatitude').html(position.coords.latitude);
+			$('#clongitude').html(position.coords.longitude);
+			phonon.panel('#currentLocPanel').open();
+		}
+    };
+
+	var watchPosition = function(evt) {
+		deviceReady(function(){
+			commonWatchId = navigator.geolocation.watchPosition(onPositionReceived,onError,{timeout:30000})
+		});
+
+		function onPositionReceived(position){
+			var newListElement = '<li> Lat: '+position.coords.latitude+' & Long: '+position.coords.longitude;
+			$('#locationChanges').append(newListElement);
+		}
+    };
+
+	var clearWatch = function(evt){
+		navigator.geolocation.clearWatch(commonWatchId);
+	}
+
+	activity.onCreate(function() {
+		document.getElementById('getCurrentLocBtn').on('tap',getCurrentLocation);
+		document.getElementById('watchPosBtn').on('tap',watchPosition);
+		document.getElementById('clearWatchBtn').on('tap',clearWatch);
+    });
+});
+```
+
+#### Step 5:
+Now, we will implement functionality to create a new contact by adding new method in *contacts.js* file and also adding an event handler for creating a contact on click of a new button. We will also add a new Popup Panel which would contain form to create a new Contact.
+
+```javascript
+var createContact = function(){
+	var contactField = {
+		displayName:$('#contact_name').val(),
+		phoneNumbers:[new ContactField('mobile', $('#contact_number').val(), true)]
+	}
+	var newContact = navigator.contacts.create(contactField);
+	newContact.save(function(contact_obj){
+		alert('Successfully created a new contact.');
+		$('#contact_name').val('');
+		$('#contact_number').val('');
+	},function(error){
+		alert("Not able to save new contact: "+error);
+	});
+}
+
+activity.onCreate(function() {
+	document.getElementById('pickContactBtn').on('tap',onAction);
+	document.getElementById('createContactBtn').on('tap',createContact);
+});
 ```

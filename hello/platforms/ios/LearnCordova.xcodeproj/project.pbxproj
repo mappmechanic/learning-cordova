@@ -32,6 +32,7 @@
 		5B405184752F427381CBF4D8 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17EB1E0F89CF48359CBFDE35 /* AddressBook.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		DF615CFA3E6A427F828A9A0F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 449BE893B52B4C60AF7700C0 /* AddressBookUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		75D3BBFD2A6942C08DBC2FEF /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D96ECB9EAE87493D9740B6C3 /* CDVDevice.m */; };
+		2F61F1AD1D684E939BF9EAE0 /* CDVLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B964D2CD3A746C9832B30CC /* CDVLocation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,8 @@
 		449BE893B52B4C60AF7700C0 /* AddressBookUI.framework */ = {isa = PBXFileReference; name = "AddressBookUI.framework"; path = "System/Library/Frameworks/AddressBookUI.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		D96ECB9EAE87493D9740B6C3 /* CDVDevice.m */ = {isa = PBXFileReference; name = "CDVDevice.m"; path = "cordova-plugin-device/CDVDevice.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		2FB7ADE5E0624131933E6594 /* CDVDevice.h */ = {isa = PBXFileReference; name = "CDVDevice.h"; path = "cordova-plugin-device/CDVDevice.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		2B964D2CD3A746C9832B30CC /* CDVLocation.m */ = {isa = PBXFileReference; name = "CDVLocation.m"; path = "cordova-plugin-geolocation/CDVLocation.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		6A6F765A05CF440D9816329B /* CDVLocation.h */ = {isa = PBXFileReference; name = "CDVLocation.h"; path = "cordova-plugin-geolocation/CDVLocation.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +239,8 @@
 				BFA099439ACF453882DABC70 /* CDVContact.h */,
 				D96ECB9EAE87493D9740B6C3 /* CDVDevice.m */,
 				2FB7ADE5E0624131933E6594 /* CDVDevice.h */,
+				2B964D2CD3A746C9832B30CC /* CDVLocation.m */,
+				6A6F765A05CF440D9816329B /* CDVLocation.h */,
 			);
 			name = Plugins;
 			path = "LearnCordova/Plugins";
@@ -360,6 +365,7 @@
 				14C5D39B5C564A9DACD25B7E /* CDVContacts.m in Sources */,
 				F50A42EB084948929E79B9A1 /* CDVContact.m in Sources */,
 				75D3BBFD2A6942C08DBC2FEF /* CDVDevice.m in Sources */,
+				2F61F1AD1D684E939BF9EAE0 /* CDVLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

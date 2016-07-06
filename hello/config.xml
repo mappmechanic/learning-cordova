@@ -18,21 +18,20 @@
     <allow-intent href="geo:*" />
     <engine name="ios" spec="~4.1.1" />
     <engine name="android" spec="~4.1.1" />
-	<hook type="before_build" src="hooks/beforeBuild.js" />
-	<platform  name="android">
-		<hook type="after_build" src="hooks/afterBuildAndroid.js" />
-		<icon src="res/icons/android/ldpi.png" density="ldpi" />
-		<icon src="res/icons/android/mdpi.png" density="mdpi" />
-		<icon src="res/icons/android/hdpi.png" density="hdpi" />
-		<icon src="res/icons/android/xhdpi.png" density="xhdpi" />
-		<icon src="res/icons/android/xxhdpi.png" density="xxhdpi" />
-		<icon src="res/icons/android/xxxhdpi.png" density="xxxhdpi" />
-
-		<!-- Splash Screens -->
-		<splash src="res/screens/android/screen-hdpi-portrait.png" density="port-hdpi"/>
-	    <splash src="res/screens/android/screen-ldpi-portrait.png" density="port-ldpi"/>
-	    <splash src="res/screens/android/screen-mdpi-portrait.png" density="port-mdpi"/>
-	    <splash src="res/screens/android/screen-xhdpi-portrait.png" density="port-xhdpi"/>
-	</platform>
-	<icon src="res/icons/ios/icon.png" platform="ios" width="57" height="57" density="mdpi" />
+    <hook src="hooks/beforeBuild.js" type="before_build" />
+    <platform name="android">
+        <hook src="hooks/afterBuildAndroid.js" type="after_build" />
+        <icon density="ldpi" src="res/icons/android/ldpi.png" />
+        <icon density="mdpi" src="res/icons/android/mdpi.png" />
+        <icon density="hdpi" src="res/icons/android/hdpi.png" />
+        <icon density="xhdpi" src="res/icons/android/xhdpi.png" />
+        <icon density="xxhdpi" src="res/icons/android/xxhdpi.png" />
+        <icon density="xxxhdpi" src="res/icons/android/xxxhdpi.png" />
+        <splash density="port-hdpi" src="res/screens/android/screen-hdpi-portrait.png" />
+        <splash density="port-ldpi" src="res/screens/android/screen-ldpi-portrait.png" />
+        <splash density="port-mdpi" src="res/screens/android/screen-mdpi-portrait.png" />
+        <splash density="port-xhdpi" src="res/screens/android/screen-xhdpi-portrait.png" />
+    </platform>
+    <icon density="mdpi" height="57" platform="ios" src="res/icons/ios/icon.png" width="57" />
+    <plugin name="cordova-plugin-geolocation" spec="~2.2.0" />
 </widget>

@@ -1,0 +1,38 @@
+<geolocation class="app-page">
+    <header class="header-bar">
+        <div class="center">
+            <button class="btn pull-left icon icon-arrow-back" data-navigation="$previous-page"></button>
+            <h1 class="title">Geolocation Plugin</h1>
+        </div>
+    </header>
+
+    <div class="content">
+		<ul class="list device-info">
+		   <li class="padded-list">
+			   <button id="getCurrentLocBtn" class="btn fit-parent primary">Get Current Location</button>
+		   </li>
+		   <li class="padded-list">
+			   <button id="watchPosBtn" class="btn fit-parent primary">Watch Position Changes</button>
+		   </li>
+		   <li class="padded-list">
+			  <button id="clearWatchBtn" class="btn fit-parent primary">Stop Watching</button>
+		  </li>
+		</ul>
+		<ul class="list" id="locationChanges">
+			<li class="divider">Regular Location Watch</li>
+		</ul>
+		<div id="currentLocPanel" class="panel">
+	        <header class="header-bar">
+	            <a class="btn icon icon-close pull-right" href="#" data-panel-close="true"></a>
+	            <h1 class="title"> Current GPS Location </h1>
+	        </header>
+
+	        <div class="content padded-full">
+				 <ul class="list">
+					<li>Latitude - <span id="clatitude"></span></li>
+					<li>Longitude - <span id="clongitude"></span></li>
+				</ul>
+	        </div>
+		</div>
+    </div>
+</geolocation>

@@ -24,6 +24,9 @@
         },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.mappmechanic.learncordova"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.mappmechanic.learncordova"
         }
     },
     "dependent_plugins": {
