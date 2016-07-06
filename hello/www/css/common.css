@@ -42,3 +42,8 @@
 .device-info li{
 	color:#AEAEAE;
 }
+
+.backdrop-panel
+{
+	z-index:0;
+}

@@ -24,7 +24,23 @@ app.on({page: 'contacts', preventClose: false, content: 'contacts.html', readyDe
         }
     };
 
+	var createContact = function(){
+		var contactField = {
+			displayName:$('#contact_name').val(),
+			phoneNumbers:[new ContactField('mobile', $('#contact_number').val(), true)]
+		}
+		var newContact = navigator.contacts.create(contactField);
+		newContact.save(function(contact_obj){
+			alert('Successfully created a new contact.');
+			$('#contact_name').val('');
+			$('#contact_number').val('');
+		},function(error){
+			alert("Not able to save new contact: "+error);
+		});
+	}
+
 	activity.onCreate(function() {
 		document.getElementById('pickContactBtn').on('tap',onAction);
+		document.getElementById('createContactBtn').on('tap',createContact);
     });
 });
