@@ -34,6 +34,9 @@
     <feature name="Geolocation">
         <param name="ios-package" value="CDVLocation" />
     </feature>
+    <feature name="SQLitePlugin">
+        <param name="ios-package" value="SQLitePlugin" />
+    </feature>
     <name>LearnCordova</name>
     <description>
         An app to learn all about Cordova.

@@ -135,6 +135,13 @@ module.exports = [
         "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
         "id": "cordova-plugin-geolocation.PositionError",
         "runs": true
+    },
+    {
+        "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
+        "id": "cordova-sqlite-storage.SQLitePlugin",
+        "clobbers": [
+            "SQLitePlugin"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -147,7 +154,8 @@ module.exports.metadata =
     "cordova-plugin-camera": "2.2.0",
     "cordova-plugin-contacts": "2.1.0",
     "cordova-plugin-device": "1.1.2",
-    "cordova-plugin-geolocation": "2.2.0"
+    "cordova-plugin-geolocation": "2.2.0",
+    "cordova-sqlite-storage": "1.4.5"
 };
 // BOTTOM OF METADATA
 });

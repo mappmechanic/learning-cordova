@@ -27,6 +27,9 @@
         },
         "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "com.mappmechanic.learncordova"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "com.mappmechanic.learncordova"
         }
     },
     "dependent_plugins": {

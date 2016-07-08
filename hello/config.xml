@@ -34,4 +34,5 @@
     </platform>
     <icon density="mdpi" height="57" platform="ios" src="res/icons/ios/icon.png" width="57" />
     <plugin name="cordova-plugin-geolocation" spec="~2.2.0" />
+    <plugin name="cordova-sqlite-storage" spec="~1.4.5" />
 </widget>
