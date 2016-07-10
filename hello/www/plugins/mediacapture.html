@@ -1,0 +1,30 @@
+<mediacapture class="app-page">
+    <header class="header-bar">
+        <div class="center">
+            <button class="btn pull-left icon icon-arrow-back" data-navigation="$previous-page"></button>
+            <h1 class="title">Media Capture Plugin</h1>
+        </div>
+    </header>
+
+    <div class="content">
+			<ul class="list">
+			   <li class="divider">Record Multimedia Files</li>
+			   <li class="padded-list">
+				    <button class="btn primary" id="recAudioBtn" data-order="takePicture">Record Audio</button>
+			   </li>
+			   <li class="padded-list">
+				    <button class="btn primary" id="recVideoBtn" data-order="takePicture">Record Video</button>
+			   </li>
+			   <li class="divider">Audio Output</li>
+			   <li class="padded-list">
+					<button class="btn primary" id="playAudioBtn" data-order="takePicture">Play Audio</button>
+					<button class="btn primary" id="stopAudioBtn" data-order="takePicture">Stop</button>
+					<button class="btn primary" id="releaseAudioBtn" data-order="takePicture">Release</button>  
+			   </li>
+			   <li class="divider">Video Output</li>
+			   <li class="padded-list">
+					<video id="recorded_video" class="hidden videoPlayer"></video>
+			   </li>
+		   </ul>
+    </div>
+</mediacapture>
