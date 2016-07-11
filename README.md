@@ -1,7 +1,7 @@
 # Learning Cordova
 Author: Rahat Khanna
-Twitter: http://twitter.com/mappmechanic
-LinkedIn: http://linkedin.com/in/rahatkh
+Twitter: http://twitter.com/mappmechanic    
+LinkedIn: http://linkedin.com/in/rahatkh    
 
 ## Introduction:
 I am writing a Repository to help beginners in Learning Cordova. This Repository will contain Step by Step Guides with Sample Codes.
