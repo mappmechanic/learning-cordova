@@ -12,10 +12,12 @@ I am writing a Repository to help beginners in Learning Cordova. This Repository
 3. [Customize App Properties](https://github.com/mappmechanic/learning-cordova#cordova-app-properties)
 4. [Cordova LifeCycle Events](https://github.com/mappmechanic/learning-cordova#cordova-lifecycle-events)
 5. [Icons & SplashScreens](https://github.com/mappmechanic/learning-cordova#icons-and-splashscreens)
-6. [Adding Basic App Framework for Plugin Testing]
-7. Cordova Network Plugin
-8. Cordova Camera Plugin
-9. Cordova Contacts Plugin
+6. [Adding Basic App Framework for Plugin Testing](https://github.com/mappmechanic/learning-cordova#adding-basic-app-framework-for-plugin-testing)
+7. [Cordova Network Plugin](https://github.com/mappmechanic/learning-cordova#cordova-network-plugin)
+8. [Cordova Camera Plugin](https://github.com/mappmechanic/learning-cordova#cordova-network-plugin)
+9. [Cordova Contacts Plugin](https://github.com/mappmechanic/learning-cordova#cordova-network-plugin)
+10. [Cordova Geolocation Plugin](https://github.com/mappmechanic/learning-cordova#cordova-network-plugin)
+11. [Cordova Sqlite Plugin](https://github.com/mappmechanic/learning-cordova#cordova-network-plugin)
 
 ## Code Samples with Steps :
 
@@ -210,12 +212,12 @@ For this project demo, we will make a folder named *res* and then have different
 	<icon src="res/icons/ios/icon.png" platform="ios" width="57" height="57" density="mdpi" />
 
 	<platform name="android">
-		<icon src="res/icons/android/ldpi.png" density="ldpi" />
-		<icon src="res/icons/android/mdpi.png" density="mdpi" />
-		<icon src="res/icons/android/hdpi.png" density="hdpi" />
-		<icon src="res/icons/android/xhdpi.png" density="xhdpi" />
-		<icon src="res/icons/android/xxhdpi.png" density="xxhdpi" />
-		<icon src="res/icons/android/xxxhdpi.png" density="xxxhdpi" />
+		<icon src="res/icons/android/icon-36-ldpi.png" density="ldpi" />
+		<icon src="res/icons/android/icon-48-mdpi.png" density="mdpi" />
+		<icon src="res/icons/android/icon-72-hdpi.png" density="hdpi" />
+		<icon src="res/icons/android/icon-96-xhdpi.png" density="xhdpi" />
+		<icon src="res/icons/android/icon-144-xxhdpi.png" density="xxhdpi" />
+		<icon src="res/icons/android/icon-192-xxxhdpi.png" density="xxxhdpi" />
 	</platform>
 ```
 
