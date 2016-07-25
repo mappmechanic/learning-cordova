@@ -18,6 +18,7 @@ I am writing a Repository to help beginners in Learning Cordova. This Repository
 9. [Cordova Contacts Plugin](https://github.com/mappmechanic/learning-cordova#cordova-network-plugin)
 10. [Cordova Geolocation Plugin](https://github.com/mappmechanic/learning-cordova#cordova-network-plugin)
 11. [Cordova Sqlite Plugin](https://github.com/mappmechanic/learning-cordova#cordova-network-plugin)
+12. [Push Notifications Plugin](https://github.com/mappmechanic/learning-cordova#push-notifications-demo-with-onesignal-100-free)
 
 ## Code Samples with Steps :
 
