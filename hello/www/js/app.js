@@ -11,7 +11,7 @@ phonon.options({
 });
 
 function deviceReady(done){
-	if(deviceReady){
+	if(isDeviceReady){
 		done();
 	}else {
 		document.addEventListener('deviceReady',onDeviceReady,false);
@@ -22,6 +22,18 @@ function deviceReady(done){
 	}
 }
 
+function subscribeNotifications(){
+	var notificationOpenedCallback = function(jsonData) {
+	   console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+	 };
+	 console.log('Init One Signal');
+	 window.plugins.OneSignal.init("2e61bde8-1f02-4e75-a90f-1c41d0a4c0d1",
+									{googleProjectNumber: "159978502825"},
+									notificationOpenedCallback);
+	 console.log('Enabling in App Notifications');
+	 // Show an alert box if a notification comes in when the user is in your app.
+	 window.plugins.OneSignal.enableInAppAlertNotification(true);
+}
 
 var app = phonon.navigator();
 
@@ -34,3 +46,8 @@ app.on({page: 'home', preventClose: false, content: null});
 
 // Let's go!
 app.start();
+
+// Subscribing to notifications when device is ready
+deviceReady(function(){
+	subscribeNotifications();
+});

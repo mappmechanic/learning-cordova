@@ -36,6 +36,9 @@
         },
         "cordova-plugin-media": {
             "PACKAGE_NAME": "com.mappmechanic.learncordova"
+        },
+        "onesignal-cordova-plugin": {
+            "PACKAGE_NAME": "com.mappmechanic.learncordova"
         }
     },
     "dependent_plugins": {

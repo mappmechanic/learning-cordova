@@ -236,10 +236,10 @@ Please add the following configuration in the platform tag for android.
 ```
 	...
 	<!-- Splash Screens -->
-		<splash src="res/screens/android/screen-hdpi-portrait.png" density="port-hdpi"/>
-		<splash src="res/screens/android/screen-ldpi-portrait.png" density="port-ldpi"/>
-		<splash src="res/screens/android/screen-mdpi-portrait.png" density="port-mdpi"/>
-		<splash src="res/screens/android/screen-xhdpi-portrait.png" density="port-xhdpi"/>
+	<splash src="res/screens/android/screen-hdpi-portrait.png" density="port-hdpi"/>
+	<splash src="res/screens/android/screen-ldpi-portrait.png" density="port-ldpi"/>
+	<splash src="res/screens/android/screen-mdpi-portrait.png" density="port-mdpi"/>
+	<splash src="res/screens/android/screen-xhdpi-portrait.png" density="port-xhdpi"/>
 	...
 ```
 
@@ -1068,5 +1068,52 @@ app.on({page: 'storage', preventClose: false, content: 'storage.html', readyDela
 	    });
 	}
 
+});
+```
+
+### Push Notifications Demo with OneSignal (100% Free)
+
+#### *Step 1*:
+
+We have to make an account on http://onesignal.com. Then, we have to add a new app.
+
+#### *Step 2*:
+
+After that we have to go to Google Developer Console, make a new project and then enable Google Cloud Messaging service for it.
+
+Then we have to create credentials for this project and copy the Server API key. We have to fill this key in the OneSignal console.
+
+#### *Step 3*:
+Now we have to add the cordova plugin SDK provided by OneSignal.
+
+`cordova plugin add onesignal-cordova-plugin --save`
+
+#### *Step 4*:
+
+Now, we have to add the following code in our app.js, to subscribe to the push notifications using onesignal plugin.
+
+Add this method after deviceReady function:
+
+```javascript
+function subscribeNotifications(){
+	var notificationOpenedCallback = function(jsonData) {
+	   console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+	 };
+	 console.log('Init One Signal');
+	 window.plugins.OneSignal.init("2e61bde8-1f02-4e75-a90f-1c41d0a4c0d1",
+									{googleProjectNumber: "159978502825"},
+									notificationOpenedCallback);
+	 console.log('Enabling in App Notifications');
+	 // Show an alert box if a notification comes in when the user is in your app.
+	 window.plugins.OneSignal.enableInAppAlertNotification(true);
+}
+```
+
+And also, add the following code at the last of *app.js* file:
+
+```javascript
+// Subscribing to notifications when device is ready
+deviceReady(function(){
+	subscribeNotifications();
 });
 ```

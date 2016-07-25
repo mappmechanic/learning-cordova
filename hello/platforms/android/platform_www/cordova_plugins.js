@@ -356,6 +356,13 @@ module.exports = [
         "clobbers": [
             "window.Media"
         ]
+    },
+    {
+        "file": "plugins/onesignal-cordova-plugin/www/OneSignal.js",
+        "id": "onesignal-cordova-plugin.OneSignal",
+        "clobbers": [
+            "OneSignal"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -372,7 +379,8 @@ module.exports.metadata =
     "cordova-sqlite-storage": "1.4.5",
     "cordova-plugin-file": "4.2.0",
     "cordova-plugin-media-capture": "1.3.0",
-    "cordova-plugin-media": "2.3.0"
+    "cordova-plugin-media": "2.3.0",
+    "onesignal-cordova-plugin": "1.13.0"
 };
 // BOTTOM OF METADATA
 });
