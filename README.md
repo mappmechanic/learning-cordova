@@ -885,31 +885,6 @@ app.on({page: 'geolocation', preventClose: false, content: 'geolocation.html', r
 });
 ```
 
-#### Step 5:
-Now, we will implement functionality to create a new contact by adding new method in *contacts.js* file and also adding an event handler for creating a contact on click of a new button. We will also add a new Popup Panel which would contain form to create a new Contact.
-
-```javascript
-var createContact = function(){
-	var contactField = {
-		displayName:$('#contact_name').val(),
-		phoneNumbers:[new ContactField('mobile', $('#contact_number').val(), true)]
-	}
-	var newContact = navigator.contacts.create(contactField);
-	newContact.save(function(contact_obj){
-		alert('Successfully created a new contact.');
-		$('#contact_name').val('');
-		$('#contact_number').val('');
-	},function(error){
-		alert("Not able to save new contact: "+error);
-	});
-}
-
-activity.onCreate(function() {
-	document.getElementById('pickContactBtn').on('tap',onAction);
-	document.getElementById('createContactBtn').on('tap',createContact);
-});
-```
-
 ### Cordova Storage - Sqlite Plugin
 We will be making a sample for working with Cordova Sqlite Plugin for all your performant storage needs.
 
