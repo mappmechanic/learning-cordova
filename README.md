@@ -1072,16 +1072,16 @@ Add this method after deviceReady function:
 
 ```javascript
 function subscribeNotifications(){
-	var notificationOpenedCallback = function(jsonData) {
-	   console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
-	 };
-	 console.log('Init One Signal');
-	 window.plugins.OneSignal.init("2e61bde8-1f02-4e75-a90f-1c41d0a4c0d1",
-									{googleProjectNumber: "159978502825"},
-									notificationOpenedCallback);
-	 console.log('Enabling in App Notifications');
-	 // Show an alert box if a notification comes in when the user is in your app.
-	 window.plugins.OneSignal.enableInAppAlertNotification(true);
+    var notificationOpenedCallback = function(jsonData) {
+       console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+     };
+     console.log('Init One Signal');
+     window.plugins.OneSignal.init("c66b7ac0-3d00-4033-b365-469941a0ec67",
+                                    {googleProjectNumber: "455699896216"},
+                                    notificationOpenedCallback);
+     console.log('Enabling in App Notifications');
+     // Show an alert box if a notification comes in when the user is in your app.
+     window.plugins.OneSignal.enableInAppAlertNotification(true);
 }
 ```
 
